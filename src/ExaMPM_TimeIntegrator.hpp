@@ -59,7 +59,8 @@ void p2g( const ExecutionSpace& exec_space, const ProblemManagerType& pm )
     double gamma = pm.gamma();
 
     // Build the local mesh.
-    auto local_mesh = Cabana::Grid::createLocalMesh<ExecutionSpace>(
+    using memory_space = typename ProblemManagerType::memory_space;
+    auto local_mesh = Cabana::Grid::createLocalMesh<memory_space>(
         *( pm.mesh()->localGrid() ) );
 
     // Loop over particles.
@@ -188,7 +189,8 @@ void g2p( const ExecutionSpace& exec_space, const ProblemManagerType& pm,
     auto k_c_sv = Kokkos::Experimental::create_scatter_view( k_c );
 
     // Build the local mesh.
-    auto local_mesh = Cabana::Grid::createLocalMesh<ExecutionSpace>(
+    using memory_space = typename ProblemManagerType::memory_space;
+    auto local_mesh = Cabana::Grid::createLocalMesh<memory_space>(
         *( pm.mesh()->localGrid() ) );
     auto cell_size =
         pm.mesh()->localGrid()->globalGrid().globalMesh().cellSize( 0 );
@@ -280,7 +282,8 @@ void correctParticlePositions( const ExecutionSpace& exec_space,
     double density = pm.density();
 
     // Build the local mesh.
-    auto local_mesh = Cabana::Grid::createLocalMesh<ExecutionSpace>(
+    using memory_space = typename ProblemManagerType::memory_space;
+    auto local_mesh = Cabana::Grid::createLocalMesh<memory_space>(
         *( pm.mesh()->localGrid() ) );
 
     // Compute nodal correction.

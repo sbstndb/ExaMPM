@@ -189,7 +189,7 @@ createSolver( const std::string& exec_space, MPI_Comm comm,
     {
 #ifdef KOKKOS_ENABLE_CUDA
         return std::make_shared<
-            ExaMPM::Solver<Kokkos::CudaSpace, Kokkos::Cuda>>(
+            ExaMPM::Solver<Kokkos::SharedSpace, Kokkos::Cuda>>(
             comm, global_bounding_box, global_num_cell, periodic, partitioner,
             halo_cell_width, create_functor, particles_per_cell, bulk_modulus,
             density, gamma, kappa, delta_t, gravity, bc );
